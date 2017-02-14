@@ -42,13 +42,16 @@ test('activeIndex state', (t) => {
   )
 
   const nexted = ai({ visibleSlides: 3 })
+  nexted.component.setState({ isAnimating: false })
   nexted.next()
+
   t.equal(
     nexted.component.state('activeIndex'),
     3,
     'activeIndex advances the number of visible slides'
   )
 
+  nexted.component.setState({ isAnimating: false })
   nexted.next()
   t.equal(
     nexted.component.state('activeIndex'),
@@ -57,6 +60,7 @@ test('activeIndex state', (t) => {
   )
 
   const preved = ai({ visibleSlides: 3, startAt: 5 })
+  preved.component.setState({ isAnimating: false })
   preved.prev()
   t.equal(
     preved.component.state('activeIndex'),
@@ -64,6 +68,7 @@ test('activeIndex state', (t) => {
     'activeIndex retretes the number of visible slides'
   )
 
+  preved.component.setState({ isAnimating: false })
   preved.prev()
   t.equal(
     preved.component.state('activeIndex'),

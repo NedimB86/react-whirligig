@@ -31,6 +31,7 @@ test('infinite prop', (t) => {
   )
 
   const infinite2 = infinite(true)([0, 1, 2])
+  infinite2.wrapped.setState({ isAnimating: false })
   infinite2.prev()
   t.equal(
     infinite2.wrapped.state('activeIndex'),
@@ -38,6 +39,7 @@ test('infinite prop', (t) => {
     'When infinite is true, preving past the begining returns to the end'
   )
 
+  infinite2.wrapped.setState({ isAnimating: false })
   infinite2.next()
   t.equal(
     infinite2.wrapped.state('activeIndex'),

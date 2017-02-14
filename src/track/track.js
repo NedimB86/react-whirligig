@@ -236,6 +236,7 @@ export default class Track extends Component {
   }
 
   slideTo (index, { immediate = false } = {}) {
+    if (this.state.isAnimating) return Promise.reject('Another Slide already in progress')
     if (this.childCount === 0) return Promise.reject('No children to slide to')
     const { afterSlide, beforeSlide, easing, animationDuration: duration, infinite, preventScroll } = this.props
     const { children, scrollLeft } = this.track

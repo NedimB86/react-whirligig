@@ -13,16 +13,19 @@ test('Track afterSlide prop', (t) => {
   let next, prev, called = 0
   const goNext = () => next()
   const goPrev = () => prev()
-  mount(
-    <Track afterSlide={() => { called++ }}>{
-      (_next, _prev) => {
-        next = _next
-        prev = _prev
-        return [1, 2]
-      }
-    }</Track>
-  )
+  const track = {
+    component: mount(
+      <Track afterSlide={function () { called++ }}>{
+        (_next, _prev) => {
+          next = _next
+          prev = _prev
+          return [1, 2]
+        }
+      }</Track>
+      )
+  }
 
+  track.component.setState({ isAnimating: false })
   goNext()
     .then(() => t.equals(called, 1, 'afterSlide function should be called after sliding to next'))
     .then(() => goPrev()
